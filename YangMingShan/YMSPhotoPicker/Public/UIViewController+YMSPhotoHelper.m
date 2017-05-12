@@ -32,6 +32,9 @@
                     [pickerViewController.delegate photoPickerViewControllerDidReceiveCameraAccessDenied:pickerViewController];
                 }
             }
+            else if ([delegate respondsToSelector:@selector(photoPickerViewControllerDidReceiveCameraAccessDenied:)]) {
+                [((id<YMSPhotoPickerViewControllerDelegate>)delegate) photoPickerViewControllerDidReceiveCameraAccessDenied:((YMSPhotoPickerViewController *)delegate)];
+            }
         }
         else if(status == AVAuthorizationStatusNotDetermined) {
             [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
@@ -48,6 +51,9 @@
                             if ([pickerViewController.delegate respondsToSelector:@selector(photoPickerViewControllerDidReceiveCameraAccessDenied:)]) {
                                 [pickerViewController.delegate photoPickerViewControllerDidReceiveCameraAccessDenied:pickerViewController];
                             }
+                        }
+                        else if ([delegate respondsToSelector:@selector(photoPickerViewControllerDidReceiveCameraAccessDenied:)]) {
+                            [((id<YMSPhotoPickerViewControllerDelegate>)delegate) photoPickerViewControllerDidReceiveCameraAccessDenied:((YMSPhotoPickerViewController *)delegate)];
                         }
                     }
                 });
